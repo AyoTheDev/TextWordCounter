@@ -42,4 +42,8 @@ class WordListViewModel : ViewModel(), CoroutineScope {
         data class WordList(val loading: Boolean?, val data: List<Word>?, val exception: Exception?) : Event()
     }
 
+    fun cancelActiveJobs() {
+        job.cancel()
+    }
+
 }

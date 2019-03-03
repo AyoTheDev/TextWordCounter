@@ -45,6 +45,8 @@ object TextAnalyser {
         return Regex("\\s+").split(data).map { it.toLowerCase() }
     }
 
+
+
     fun getTextFromUrl(bookUrl: String): String? = try {
         val stringBuilder = StringBuilder()
         val url = URL(bookUrl)

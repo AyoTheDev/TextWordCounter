@@ -31,6 +31,12 @@ class MainActivity : AppCompatActivity() {
         viewModel?.loadWordListFromUrl(BOOK_URL)
     }
 
+    override fun onDestroy() {
+        viewModel?.cancelActiveJobs()
+        snackBar?.apply { if (isShown) dismiss() }
+        super.onDestroy()
+    }
+
     private fun handleEvents(event: WordListViewModel.Event?) {
         when (event) {
             is WordListViewModel.Event.WordList -> {
