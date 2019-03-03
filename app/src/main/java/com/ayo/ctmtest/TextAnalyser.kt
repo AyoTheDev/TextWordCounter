@@ -51,11 +51,9 @@ object TextAnalyser {
         val stringBuilder = StringBuilder()
         val url = URL(bookUrl)
         val conn = url.openConnection() as HttpURLConnection
-        conn.connectTimeout = 60000 // timing out in a minute
+        conn.connectTimeout = 60000
         val input = BufferedReader(InputStreamReader(conn.inputStream))
-        input.forEachLine {
-            stringBuilder.append(it)
-        }
+        input.forEachLine { stringBuilder.append(it) }
         input.close()
         stringBuilder.toString()
     } catch (e: Exception) {
