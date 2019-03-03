@@ -9,6 +9,7 @@ import java.net.URL
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import java.net.URLDecoder
+import java.util.regex.Pattern
 
 object TextAnalyser {
 
@@ -25,12 +26,12 @@ object TextAnalyser {
         val list = mutableListOf<Word>()
         parseListFromRawData(data).forEach {
             addOrUpdateWordToList(list, it)
-            send(list.sortedWith(compareBy(Word::key)))
+            send(list.sortedWith(compareByDescending(Word::count)))
         }
-        send(emptyList()) //bit cheeky
+        send(emptyList<Word>())
     }
 
-    private fun addOrUpdateWordToList(list: MutableList<Word>, word: String){
+    private fun addOrUpdateWordToList(list: MutableList<Word>, word: String) {
         if (!list.any { it.key == word })
             list.add(Word(key = word, count = 1, isPrime = false))
         else {
@@ -41,12 +42,30 @@ object TextAnalyser {
                     }
         }
     }
+
+    @ExperimentalCoroutinesApi
+    private suspend fun addOrUpdateWordToListWithRegex(list: MutableList<Word>, data: String, producer: ProducerScope<List<Word>>) {
+        val dataLowerCase = data.toLowerCase()
+        Regex("\\(").replace(dataLowerCase, "")
+        Regex("\\)").replace(dataLowerCase, "")
+        parseListFromRawData(data).forEach {
+            var i = 0
+            val p = Pattern.compile(it)
+            val m = p.matcher(dataLowerCase)
+            while (m.find()) {
+                i++
+            }
+            list.add(Word(key = it, count = i, isPrime = i.isPrimeComputeStatically()))
+            producer.send(list.sortedWith(compareByDescending(Word::count)))
+        }
+
+    }
+
     private fun parseListFromRawData(data: String): List<String> {
         val string = URLDecoder.decode(data, "UTF-8")
         Regex("[^A-Za-z' ]").replace(string, "")
         return Regex("\\s+").split(string).map { it.toLowerCase() }
     }
-
 
 
     fun getTextFromUrl(bookUrl: String): String? = try {
