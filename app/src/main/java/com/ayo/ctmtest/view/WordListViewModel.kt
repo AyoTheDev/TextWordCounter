@@ -17,7 +17,7 @@ class WordListViewModel : ViewModel(), CoroutineScope {
         get() = contextPool.Main
 
 
-    val event = SingleLiveEvent<Event>()//todo make single live event
+    val event = SingleLiveEvent<Event>()
 
     @UseExperimental(ObsoleteCoroutinesApi::class)
     @ExperimentalCoroutinesApi
