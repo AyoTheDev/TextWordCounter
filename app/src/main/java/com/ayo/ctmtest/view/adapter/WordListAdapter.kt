@@ -6,6 +6,7 @@ import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.ayo.ctmtest.R
 import com.ayo.ctmtest.data.Word
 import com.ayo.ctmtest.view.adapter.viewholder.WordViewHolder
 import kotlinx.android.synthetic.main.item_word.view.*
