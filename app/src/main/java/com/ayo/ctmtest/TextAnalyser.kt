@@ -67,8 +67,7 @@ object TextAnalyser {
         return Regex("\\s+").split(string).map { it.toLowerCase() }
     }
 
-
-    fun getTextFromUrl(bookUrl: String): String? = try {
+    fun getTextFromUrl(bookUrl: String): String? {
         val stringBuilder = StringBuilder()
         val url = URL(bookUrl)
         val conn = url.openConnection() as HttpURLConnection
@@ -76,9 +75,6 @@ object TextAnalyser {
         val input = BufferedReader(InputStreamReader(conn.inputStream))
         input.forEachLine { stringBuilder.append(it) }
         input.close()
-        stringBuilder.toString()
-    } catch (e: Exception) {
-        Log.d("Error: ", e.toString())
-        null
+        return stringBuilder.toString()
     }
 }
