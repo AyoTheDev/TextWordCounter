@@ -2,7 +2,7 @@ package com.ayo.ctmtest.view
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.ayo.ctmtest.BookAi
+import com.ayo.ctmtest.TextAnalyser
 import com.ayo.ctmtest.CoroutineContextProvider
 import com.ayo.ctmtest.data.Word
 import kotlinx.coroutines.*
@@ -24,7 +24,7 @@ class WordListViewModel : ViewModel(), CoroutineScope {
     fun loadWordListFromUrl(url: String) {
         event.value = Event.WordList(true, null, null)
         launch(context = contextPool.IO) {
-            BookAi.apply {
+            TextAnalyser.apply {
                 getTextFromUrl(url)?.let {
                     getWordSetAsync(it).consumeEach { words ->
                         event.postValue(Event.WordList(words?.isEmpty() != true, words, null))
