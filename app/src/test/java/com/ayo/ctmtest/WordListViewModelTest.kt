@@ -26,7 +26,7 @@ class WordListViewModelTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    lateinit var lifecycle : LifecycleRegistry
+    lateinit var lifecycle: LifecycleRegistry
 
     @Before
     fun setUp() {

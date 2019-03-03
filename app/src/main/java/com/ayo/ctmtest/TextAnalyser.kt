@@ -1,13 +1,15 @@
 package com.ayo.ctmtest
 
-import android.util.Log
 import com.ayo.ctmtest.data.Word
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.ProducerScope
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.produce
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.*
 import java.net.URLDecoder
 import java.util.regex.Pattern
 

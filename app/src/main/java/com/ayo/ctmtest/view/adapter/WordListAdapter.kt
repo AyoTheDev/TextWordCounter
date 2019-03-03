@@ -1,18 +1,14 @@
 package com.ayo.ctmtest.view.adapter
 
-import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
-import android.text.SpannableStringBuilder
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ayo.ctmtest.data.Word
 import com.ayo.ctmtest.view.adapter.viewholder.WordViewHolder
 import kotlinx.android.synthetic.main.item_word.view.*
-import com.ayo.ctmtest.R
-import android.text.Spannable
-import android.text.SpannableString
-import java.lang.StringBuilder
 
 
 class WordListAdapter(private val listener: ItemClickListener? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

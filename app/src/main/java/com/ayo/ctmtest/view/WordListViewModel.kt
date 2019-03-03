@@ -1,9 +1,9 @@
 package com.ayo.ctmtest.view
 
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.ayo.ctmtest.TextAnalyser
 import com.ayo.ctmtest.CoroutineContextProvider
+import com.ayo.ctmtest.SingleLiveEvent
+import com.ayo.ctmtest.TextAnalyser
 import com.ayo.ctmtest.data.Word
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.consumeEach
@@ -17,7 +17,7 @@ class WordListViewModel : ViewModel(), CoroutineScope {
         get() = contextPool.Main
 
 
-    val event = MutableLiveData<Event>()//todo make single live event
+    val event = SingleLiveEvent<Event>()//todo make single live event
 
     @UseExperimental(ObsoleteCoroutinesApi::class)
     @ExperimentalCoroutinesApi
