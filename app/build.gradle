@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    defaultConfig {
+        applicationId globalConfiguration["androidApplicationId"]
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        versionCode globalConfiguration["androidVersionCode"]
+        versionName globalConfiguration["androidVersionName"]
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def dependencies = rootProject.ext.applicationDependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    implementation dependencies.supportRecyclerView
+    implementation dependencies.supportDesign
+    implementation dependencies.viewModel
+    implementation dependencies.viewModelExtensions
+    implementation dependencies.kotlinCoroutinesCore
+    implementation dependencies.kotlinCoroutinesAndroid
+    implementation dependencies.kotlin
+    implementation dependencies.constraintLayout
+    implementation dependencies.appCompat
+
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoAndroid
+    testImplementation testDependencies.mockitoInLine
+    testImplementation testDependencies.mockitoKotlin
+    testImplementation testDependencies.archCore
+    androidTestImplementation testDependencies.runner
+
+
+}

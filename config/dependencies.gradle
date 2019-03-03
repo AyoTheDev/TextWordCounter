@@ -1,0 +1,64 @@
+ext {
+
+    //Android Versions
+    androidBuildToolsVersion = '26.0.2'
+    androidMinSdkVersion = 19
+    androidTargetSdkVersion = 27
+    androidCompileSdkVersion = 27
+
+    //Application Versions
+    androidVersionCode = 1
+    androidVersionName = "1.0"
+    androidApplicationId = "com.ayo.ctm_test"
+
+    //Library Versions
+    androidSupportLibraryVersion = '27.1.1'
+    androidConstraintLayoutVersion = '1.1.0-beta6'
+    retrofitVersion = '2.4.0'
+    gsonVersion = '2.8.2'
+    okHttpVersion = '3.10.0'
+    mockitoVersion = '2.13.0'
+
+
+    retrofitCoroutinesAdapterVersion = '1.0.0'
+    kotlinCoroutinesVersion = '1.1.1'
+    kotlinVersion = '1.3.21'
+
+
+    applicationDependencies = [
+            supportRecyclerView    : "com.android.support:recyclerview-v7:${androidSupportLibraryVersion}",
+            supportDesign          : "com.android.support:design:${androidSupportLibraryVersion}",
+            appCompat              : "com.android.support:appcompat-v7:${androidSupportLibraryVersion}",
+            viewModel              : "android.arch.lifecycle:viewmodel:1.1.1",
+            viewModelExtensions    : "android.arch.lifecycle:extensions:1.1.1",
+            kotlinCoroutinesCore   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}",
+            kotlinCoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinCoroutinesVersion}", //this library gives convenience methods for launching coroutines on the UI thread
+            kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+            constraintLayout       : "com.android.support.constraint:constraint-layout:1.1.2"
+    ]
+
+
+    apiDependencies = [
+            appCompat                : "com.android.support:appcompat-v7:${androidSupportLibraryVersion}",
+            retrofit                 : "com.squareup.retrofit2:retrofit:${retrofitVersion}",//http client
+            retrofitGsonMap          : "com.squareup.retrofit2:converter-gson:${retrofitVersion}", //A Converter which uses Gson for serialization to and from JSON
+            retrofitCoroutinesAdapter: "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${retrofitCoroutinesAdapterVersion}",//A Retrofit 2 CallAdapter.Factory for Kotlin coroutine's Deferred
+            okHttp                   : "com.squareup.okhttp3:okhttp:${okHttpVersion}",//http client
+            okHttpLogging            : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",//used to efficiently catch exceptions on the network
+            gson                     : "com.google.code.gson:gson:${gsonVersion}",//used to cache data into gson and save them to shared preferences
+            kotlinCoroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}",
+            kotlinCoroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinCoroutinesVersion}",
+            kotlin                   : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+    ]
+
+    testDependencies = [
+            mockito       : "org.mockito:mockito-core:${mockitoVersion}",
+            mockitoAndroid: "org.mockito:mockito-android:${mockitoVersion}",
+            mockitoInLine : "org.mockito:mockito-inline:${mockitoVersion}",
+            junit         : "junit:junit:4.12",
+            runner        : "com.android.support.test:runner:1.0.2",
+            mockitoKotlin : "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1",
+            archCore      : "android.arch.core:core-testing:1.1.1"
+    ]
+
+}
