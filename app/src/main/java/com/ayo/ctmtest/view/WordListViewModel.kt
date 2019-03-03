@@ -11,10 +11,10 @@ import kotlin.coroutines.CoroutineContext
 
 class WordListViewModel : ViewModel(), CoroutineScope {
 
-    private val job = Job()
+    private val jobs = mutableListOf<Job>()
     private lateinit var contextPool: CoroutineContextProvider
     override val coroutineContext: CoroutineContext
-        get() = contextPool.Main + job
+        get() = contextPool.Main
 
 
     val event = MutableLiveData<Event>()//todo make single live event
@@ -23,27 +23,31 @@ class WordListViewModel : ViewModel(), CoroutineScope {
     @ExperimentalCoroutinesApi
     fun loadWordListFromUrl(url: String) {
         event.value = Event.WordList(true, null, null)
-        launch(context = contextPool.IO) {
-            TextAnalyser.apply {
-                getTextFromUrl(url)?.let {
-                    getWordSetAsync(it).consumeEach { words ->
-                        event.postValue(Event.WordList(words?.isEmpty() != true, words, null))
+        jobs.add(
+                launch(context = contextPool.IO) {
+                    TextAnalyser.apply {
+                        getTextFromUrl(url)?.let {
+                            getWordSetAsync(it).consumeEach { words ->
+                                event.postValue(Event.WordList(words?.isEmpty() != true, words, null))
 
+                            }
+                        }
                     }
                 }
-            }
-        }
+        )
+
     }
 
-    fun inject(contextPool: CoroutineContextProvider = CoroutineContextProvider()){
+    fun inject(contextPool: CoroutineContextProvider = CoroutineContextProvider()) {
         this.contextPool = contextPool
     }
+
     sealed class Event {
         data class WordList(val loading: Boolean?, val data: List<Word>?, val exception: Exception?) : Event()
     }
 
     fun cancelActiveJobs() {
-        job.cancel()
+        jobs.forEach { it.cancel() }
     }
 
 }
