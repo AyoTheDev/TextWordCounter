@@ -12,7 +12,7 @@ import kotlin.coroutines.CoroutineContext
 class WordListViewModel : ViewModel(), CoroutineScope {
 
     private val job = Job()
-    private val contextPool = CoroutineContextProvider()
+    private lateinit var contextPool: CoroutineContextProvider
     override val coroutineContext: CoroutineContext
         get() = contextPool.Main + job
 
@@ -35,6 +35,9 @@ class WordListViewModel : ViewModel(), CoroutineScope {
         }
     }
 
+    fun inject(contextPool: CoroutineContextProvider = CoroutineContextProvider()){
+        this.contextPool = contextPool
+    }
     sealed class Event {
         data class WordList(val loading: Boolean?, val data: List<Word>?, val exception: Exception?) : Event()
     }

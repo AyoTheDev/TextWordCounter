@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         initView()
         viewModel = ViewModelProviders.of(this).get(WordListViewModel::class.java)
         viewModel?.event?.observe(this, Observer { handleEvents(it) })
+        viewModel?.inject()
         viewModel?.loadWordListFromUrl(BOOK_URL)
     }
 
