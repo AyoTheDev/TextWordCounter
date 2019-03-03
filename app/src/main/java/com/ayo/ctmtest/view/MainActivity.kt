@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val BOOK_URL = "https://www.w3.org/TR/PNG/iso_8859-1.txt"
+        private const val BOOK_URL = "http://www.loyalbooks.com/download/text/Railway-Children-by-E-Nesbit.txt"
 
     }
 }

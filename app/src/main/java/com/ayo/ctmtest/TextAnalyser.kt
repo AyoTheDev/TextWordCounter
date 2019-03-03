@@ -8,6 +8,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
+import java.net.URLDecoder
 
 object TextAnalyser {
 
@@ -36,13 +37,14 @@ object TextAnalyser {
             list.first { it.key == word }
                     .apply {
                         ++count
-                        isPrime = count.isPrime()
+                        isPrime = count.isPrimeCompute()
                     }
         }
     }
     private fun parseListFromRawData(data: String): List<String> {
-        Regex("[^A-Za-z' ]").replace(data, "")
-        return Regex("\\s+").split(data).map { it.toLowerCase() }
+        val string = URLDecoder.decode(data, "UTF-8")
+        Regex("[^A-Za-z' ]").replace(string, "")
+        return Regex("\\s+").split(string).map { it.toLowerCase() }
     }
 
 
