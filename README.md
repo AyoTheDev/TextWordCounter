@@ -1,2 +1,4 @@
 # Text Word Counter
-An application that counts the number of words from a given URL pointing to a .txt file and also tells you if this word count is prime or not
+The application outputs individual words that appears in a book, and how many times that word appears in the text file.
+
+it also outputs whether the number of times each word appears is a prime number
